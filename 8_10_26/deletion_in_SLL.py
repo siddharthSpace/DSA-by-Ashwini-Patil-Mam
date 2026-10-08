@@ -1,4 +1,5 @@
-# Singly Linear Linked List
+# Singly Linear Linked List: deletion by value
+
 
 class Node:
     def __init__(self, val):
@@ -13,22 +14,22 @@ class LinkedList:
     def append(self, new_node):
         if self.head is None:
             self.head = new_node
-        else:
-            temp = self.head
-            while temp.next:
-                temp = temp.next
-            temp.next = new_node
+            return
+
+        temp = self.head
+        while temp.next:
+            temp = temp.next
+        temp.next = new_node
 
     def delete(self, value):
         if self.head is None:
             return False
 
-        # Delete the head node if it matches
+        # Handle deletion of the first node.
         if self.head.data == value:
             self.head = self.head.next
             return True
 
-        # Find the node and link around it
         previous = self.head
         current = self.head.next
 
@@ -39,7 +40,7 @@ class LinkedList:
             previous = current
             current = current.next
 
-        return False  # Value was not found
+        return False  # The value was not found.
 
     def print(self):
         temp = self.head
@@ -55,6 +56,9 @@ linked_list.append(Node(20))
 linked_list.append(Node(30))
 linked_list.append(Node(40))
 
-linked_list.delete(20)
+if linked_list.delete(20):
+    print("Node deleted")
+else:
+    print("Value not found")
 
 linked_list.print()
